@@ -17,7 +17,6 @@ class Solution {
             graph[v].add(u);
         }
 
-        // BFS to find maximum depth from root (node 1)
         int maxDepth = 0;
         boolean[] visited = new boolean[n + 1];
 
@@ -40,8 +39,6 @@ class Solution {
             }
         }
 
-        // Number of assignments with odd total sum on a path of length maxDepth:
-        // = 2^(maxDepth - 1)
         return (int) modPow(2, maxDepth - 1);
     }
 
