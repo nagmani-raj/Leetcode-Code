@@ -1,8 +1,8 @@
 class Solution {
     public int minCost(int[] cost , int ind , int[] dp) {
-        if(ind<=1) return cost[ind];
+        if(ind >= cost.length) return 0;
         if(dp[ind] != -1) return dp[ind];
-        int ans = cost[ind] + Math.min(minCost(cost, ind-1, dp) ,minCost(cost, ind - 2, dp));
+        int ans = cost[ind] + Math.min(minCost(cost, ind+1, dp) ,minCost(cost, ind+2, dp));
         dp[ind] = ans;
         return ans;
     }
@@ -10,6 +10,6 @@ class Solution {
         int n = cost.length;
         int[] dp = new int[n];
         Arrays.fill(dp,-1);
-        return Math.min(minCost(cost, n-1, dp) ,minCost(cost, n-2, dp));
+        return Math.min(minCost(cost, 0, dp) ,minCost(cost, 1, dp));
     }
 }
