@@ -1,40 +1,15 @@
 class Solution {
-    int[] dp;
-    public int minCost(int[] cost , int index) {
-        if(index<=1) return cost[index];
-        if(dp[index]!=-1) return dp[index];
-        return dp[index] = cost[index]+Math.min(minCost(cost , index-1),minCost(cost , index-2));
-
+    public int minCost(int[] cost , int ind , int[] dp) {
+        if(ind<=1) return cost[ind];
+        if(dp[ind] != -1) return dp[ind];
+        int ans = cost[ind] + Math.min(minCost(cost, ind-1, dp) ,minCost(cost, ind - 2, dp));
+        dp[ind] = ans;
+        return ans;
     }
     public int minCostClimbingStairs(int[] cost) {
         int n = cost.length;
-        dp = new int[n+1];
-
-        for(int i=0; i<=n; i++) dp[i] = -1;
-
-        return Math.min(minCost(cost , n-1),minCost(cost , n-2));
-
+        int[] dp = new int[n];
+        Arrays.fill(dp,-1);
+        return Math.min(minCost(cost, n-1, dp) ,minCost(cost, n-2, dp));
     }
 }
-
-
-// class Solution {
-//     int[] dp;
-
-//     public int minCost(int[] cost, int index) {
-//         if(index >= cost.length) return 0;
-
-//         if(dp[index] != -1) return dp[index];
-
-//         return dp[index] = cost[index] + Math.min(minCost(cost, index + 1), minCost(cost, index + 2));
-//     }
-
-//     public int minCostClimbingStairs(int[] cost) {
-//         int n = cost.length;
-//         dp = new int[n + 1];
-
-//         for(int i = 0; i <= n; i++) dp[i] = -1;
-
-//         return Math.min(minCost(cost, 0), minCost(cost, 1));
-//     }
-// }
