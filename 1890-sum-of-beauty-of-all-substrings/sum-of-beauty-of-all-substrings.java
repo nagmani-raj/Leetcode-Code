@@ -3,23 +3,21 @@ class Solution {
         int n = s.length();
         int ans = 0;
 
-        for (int i = 0; i < n; i++) {
+        for(int i=0; i<n; i++){
             int[] freq = new int[26];
-
-            for (int j = i; j < n; j++) {
+            for(int j = i; j<n; j++){
                 freq[s.charAt(j) - 'a']++;
+                int maxf = 0;
+                int minf = 1000000;
 
-                int maxFreq = 0;
-                int minFreq = Integer.MAX_VALUE;
-
-                for (int f : freq) {
-                    if (f > 0) {
-                        maxFreq = Math.max(maxFreq, f);
-                        minFreq = Math.min(minFreq, f);
+                for(int f : freq){
+                    if(f > 0){
+                        maxf = Math.max(maxf,f);
+                        minf = Math.min(minf,f);
                     }
                 }
 
-                ans += (maxFreq - minFreq);
+                ans += (maxf - minf);
             }
         }
 
