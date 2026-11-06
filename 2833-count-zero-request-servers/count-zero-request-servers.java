@@ -1,0 +1,35 @@
+public class Solution {
+    public int[] countServers(int n, int[][] logs, int x, int[] queries) {
+        Arrays.sort(logs, (a, b) -> Integer.compare(a[1], b[1]));
+        int m = queries.length;
+        int len = logs.length;
+        int[][] qarr = new int[m][];
+        for (int i = 0; i < m; i++) {
+            qarr[i] = new int[] {i, queries[i]};
+        }
+        Arrays.sort(qarr, (a, b) -> Integer.compare(a[1], b[1]));
+        int[] ans = new int[m];
+        int[] freq = new int[n + 1];
+        int l = 0;
+        int r = 0;
+        int noReq = n;
+        for (int[] q : qarr) {
+            int i = q[0];
+            int t = q[1];
+            while (r < len && logs[r][1] <= t) {
+                if (freq[logs[r][0]]++ == 0) {
+                    noReq--;
+                }
+                r++;
+            }
+            while (l < len && logs[l][1] < t - x) {
+                if (freq[logs[l][0]]-- == 1) {
+                    noReq++;
+                }
+                l++;
+            }
+            ans[i] = noReq;
+        }
+        return ans;
+    }
+}
