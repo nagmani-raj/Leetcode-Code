@@ -11,7 +11,15 @@ class Solution {
         for(int ch : dp){
             if(ch != 0) return false;
         }
-
         return true;
+
+        // char[] a = s.toCharArray();
+        // char[] b = t.toCharArray();
+
+        // Arrays.sort(a);
+        // Arrays.sort(b);
+
+        // return Arrays.equals(a, b);
+
     }
 }
